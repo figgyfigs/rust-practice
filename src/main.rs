@@ -6,18 +6,47 @@ in a department or all people in the company by department, sorted alphabeticall
 
 use std::io;
 
-fn main() {
-    //println!("Running...");
-
-    let user_input = get_input();
-
-    println!("User typed... {}", user_input);
+enum OpCode {
+    Exit,
+    ListDepartments,
+    AddEmployee,
+    ListDepartmentEmployees,
+    AllEmployees,  
 }
 
-fn get_input() -> String {
-    let mut op_code = String::new();
-    io::stdin().read_line(&mut op_code)
-    .expect("Failed to read the line.");
+fn main() {
+    display_ops();
+    let user_input = get_input();
 
-    return op_code
+    match user_input {
+        1 => println!("One!!"),
+        2 => println!("Two!!"),
+        3 => println!("Three!!"),
+        4 => println!("Four!!"),
+        _ => println!("Invalid"),
+    }
+
+    //println!("User typed... {}", user_input);
+}
+
+fn display_ops() {
+    println!("Welcome! What would you like to do?");
+    println!("Press 1: To see a list of departments");
+    println!("Press 2: To add an employee to a department");
+    println!("Press 3: To list employees in a department");
+    println!("Press 4: To list all employees in the company");
+    println!("Press 0: Exit");
+}
+
+fn get_input() -> i32 {
+    let mut op_code = String::new();
+
+    io::stdin().read_line(&mut op_code).expect("Failed to read the line.");
+
+    let op_code: i32 = match op_code.trim().parse() {
+        Ok(num) => num,
+        Err(_) => -1,
+    };
+    
+    op_code
 }
