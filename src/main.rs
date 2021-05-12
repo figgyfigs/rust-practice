@@ -19,7 +19,7 @@ fn main() {
     let user_input = get_input();
 
     match user_input {
-        1 => println!("One!!"),
+        Some(OpCode::ListDepartments) => println!("One!!"),
         2 => println!("Two!!"),
         3 => println!("Three!!"),
         4 => println!("Four!!"),
@@ -38,15 +38,18 @@ fn display_ops() {
     println!("Press 0: Exit");
 }
 
-fn get_input() -> i32 {
+fn get_input() -> Option<OpCode> {
     let mut op_code = String::new();
 
     io::stdin().read_line(&mut op_code).expect("Failed to read the line.");
 
-    let op_code: i32 = match op_code.trim().parse() {
-        Ok(num) => num,
-        Err(_) => -1,
+    let op_code: OpCode = match op_code.trim().parse() {
+        Ok(1) => OpCode::ListDepartments,
+        Ok(2) => OpCode::AddEmployee,
+        Ok(3) => OpCode::ListDepartmentEmployees,
+        Ok(4) => OpCode::AllEmployees,
+        Err(_) => OpCode::Exit,
     };
     
-    op_code
+    Some(op_code)
 }
