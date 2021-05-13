@@ -11,7 +11,8 @@ enum OpCode {
     ListDepartments,
     AddEmployee,
     ListDepartmentEmployees,
-    AllEmployees,  
+    AllEmployees,
+    InvalidOp,
 }
 
 fn main() {
@@ -19,11 +20,13 @@ fn main() {
     let user_input = get_input();
 
     match user_input {
-        Some(OpCode::ListDepartments) => println!("One!!"),
-        2 => println!("Two!!"),
-        3 => println!("Three!!"),
-        4 => println!("Four!!"),
-        _ => println!("Invalid"),
+        Some(OpCode::ListDepartments) => println!("Listing Departments"),
+        Some(OpCode::AddEmployee) => println!("Add a employee"),
+        Some(OpCode::ListDepartmentEmployees) => println!("List employees in x department"),
+        Some(OpCode::AllEmployees) => println!("List all employees in the company"),
+        Some(OpCode::Exit) => println!("Exit"),
+        Some(OpCode::InvalidOp) => println!("Invalid OpCode"),
+        None => println!("Invalid"),
     }
 
     //println!("User typed... {}", user_input);
@@ -48,7 +51,9 @@ fn get_input() -> Option<OpCode> {
         Ok(2) => OpCode::AddEmployee,
         Ok(3) => OpCode::ListDepartmentEmployees,
         Ok(4) => OpCode::AllEmployees,
-        Err(_) => OpCode::Exit,
+        Ok(0) => OpCode::Exit,
+        Ok(_) => OpCode::InvalidOp,
+        Err(_) => OpCode::InvalidOp,
     };
     
     Some(op_code)
