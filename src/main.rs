@@ -5,6 +5,7 @@ in a department or all people in the company by department, sorted alphabeticall
 */
 
 use std::io;
+use std::collections::HashMap;
 
 enum OpCode {
     Exit,
@@ -16,6 +17,12 @@ enum OpCode {
 }
 
 fn main() {
+
+    let mut departments = HashMap::new();
+
+    departments.insert("Daniel", "798-1364");
+
+
     display_ops();
     let user_input = get_input();
 
