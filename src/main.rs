@@ -17,17 +17,21 @@ enum OpCode {
 }
 
 fn main() {
+    println!("Welcome... loading employee system");
+    let mut my_vec = vec![];
+    let mut departments: HashMap<String, Vec> = HashMap::new();
 
-    let mut departments = HashMap::new();
 
-    departments.insert("Daniel", "798-1364");
+    departments.insert("Sales", my_vec);
+    //departments.insert("Sales", my_vec);
 
+    //println!("{:?}", departments);
 
     display_ops();
     let user_input = get_input();
 
     match user_input {
-        Some(OpCode::ListDepartments) => println!("Listing Departments"),
+        Some(OpCode::ListDepartments) => list_departments(),
         Some(OpCode::AddEmployee) => println!("Add a employee"),
         Some(OpCode::ListDepartmentEmployees) => println!("List employees in x department"),
         Some(OpCode::AllEmployees) => println!("List all employees in the company"),
@@ -35,8 +39,6 @@ fn main() {
         Some(OpCode::InvalidOp) => println!("Invalid OpCode"),
         None => println!("Invalid"),
     }
-
-    //println!("User typed... {}", user_input);
 }
 
 fn display_ops() {
@@ -64,4 +66,8 @@ fn get_input() -> Option<OpCode> {
     };
     
     Some(op_code)
+}
+
+fn list_departments() {
+    println!("listing departments...");
 }
