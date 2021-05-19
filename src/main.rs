@@ -18,28 +18,30 @@ enum OpCode {
 
 fn main() {
     println!("Welcome... loading employee system");
-    let mut my_vec = vec![];
-    let mut departments: HashMap<String, Vec> = HashMap::new();
+    let mut my_vec = vec!["Human Resources", "Sales", "Engineering", "Customer Service"];
+    let mut departments = HashMap::new();
 
+    loop {
+        display_ops();
+        let user_input = get_input();
+
+        match user_input {
+            Some(OpCode::ListDepartments) => list_departments(),
+            Some(OpCode::AddEmployee) => println!("Add a employee"),
+            Some(OpCode::ListDepartmentEmployees) => println!("List employees in x department"),
+            Some(OpCode::AllEmployees) => println!("List all employees in the company"),
+            Some(OpCode::Exit) => println!("Exit"),
+            Some(OpCode::InvalidOp) => println!("Invalid OpCode"),
+            None => println!("Invalid"),
+        }
+    }
+}
 
     departments.insert("Sales", my_vec);
     //departments.insert("Sales", my_vec);
 
     //println!("{:?}", departments);
 
-    display_ops();
-    let user_input = get_input();
-
-    match user_input {
-        Some(OpCode::ListDepartments) => list_departments(),
-        Some(OpCode::AddEmployee) => println!("Add a employee"),
-        Some(OpCode::ListDepartmentEmployees) => println!("List employees in x department"),
-        Some(OpCode::AllEmployees) => println!("List all employees in the company"),
-        Some(OpCode::Exit) => println!("Exit"),
-        Some(OpCode::InvalidOp) => println!("Invalid OpCode"),
-        None => println!("Invalid"),
-    }
-}
 
 fn display_ops() {
     println!("Welcome! What would you like to do?");
