@@ -18,13 +18,19 @@ enum OpCode {
 
 fn main() {
     println!("Welcome... loading employee system");
-    let mut my_vec = vec!["Human Resources", "Sales", "Engineering", "Customer Service"];
-    let mut departments = HashMap::new();
+
+    //Create vector and Hashmap
+    //Hashmap Key will be a String and Value will contain a Vector of employees names
+    let mut my_vec = vec![];
+    let mut departments: HashMap<&String, Vec<String>> = HashMap::new();
 
     loop {
+        
         display_ops();
         let user_input = get_input();
 
+        //Matches desired command user inputted. This match will call functions
+        //TODO: Implement functions for each valid command
         match user_input {
             Some(OpCode::ListDepartments) => list_departments(),
             Some(OpCode::AddEmployee) => println!("Add a employee"),
@@ -37,7 +43,7 @@ fn main() {
     }
 }
 
-    departments.insert("Sales", my_vec);
+    //departments.insert("Sales", my_vec);
     //departments.insert("Sales", my_vec);
 
     //println!("{:?}", departments);
@@ -72,4 +78,8 @@ fn get_input() -> Option<OpCode> {
 
 fn list_departments() {
     println!("listing departments...");
+}
+
+fn add_employee() {
+    
 }
