@@ -21,8 +21,15 @@ fn main() {
 
     //Create vector and Hashmap
     //Hashmap Key will be a String and Value will contain a Vector of employees names
-    let mut my_vec = vec![];
-    let mut departments: HashMap<&String, Vec<String>> = HashMap::new();
+    let mut my_vec = vec!["Alan", "Jen", "Satoshi"];
+    let mut departments = HashMap::new();
+    let new_dept = String::from("Engineering");
+
+    departments.insert(&new_dept, my_vec);
+
+    for (key, value) in &departments {
+        println!("{}: {:?}", key, value);
+    }
 
     loop {
         
@@ -74,6 +81,10 @@ fn get_input() -> Option<OpCode> {
     };
     
     Some(op_code)
+}
+
+fn new_department() {
+    
 }
 
 fn list_departments() {
