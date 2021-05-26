@@ -34,7 +34,7 @@ fn main() {
     loop {
         
         display_ops();
-        let user_input = get_input();
+        let user_input = get_opcode();
 
         //Matches desired command user inputted. This match will call functions
         //TODO: Implement functions for each valid command
@@ -65,7 +65,7 @@ fn display_ops() {
     println!("Press 0: Exit");
 }
 
-fn get_input() -> Option<OpCode> {
+fn get_opcode() -> Option<OpCode> {
     let mut op_code = String::new();
 
     io::stdin().read_line(&mut op_code).expect("Failed to read the line.");
@@ -92,5 +92,11 @@ fn list_departments() {
 }
 
 fn add_employee() {
-    
+    println!("Follow the template to add an employee to a department: ");
+    println!("Add {{Name}} to {{Company Department}}");
+    println!("Example: Add John to Sales");
+
+    let mut user_input = String::new();
+
+    io::stdin().read_line(&mut user_input).expect("Failed to read the line.");
 }
