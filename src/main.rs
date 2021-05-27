@@ -17,7 +17,8 @@ enum OpCode {
 }
 
 fn main() {
-    println!("Welcome... loading employee system");
+    println!("Welcome, loading employee system...");
+    println!();
 
     //Create vector and Hashmap
     //Hashmap Key will be a String and Value will contain a Vector of employees names
@@ -40,7 +41,7 @@ fn main() {
         //TODO: Implement functions for each valid command
         match user_input {
             Some(OpCode::ListDepartments) => list_departments(),
-            Some(OpCode::AddEmployee) => println!("Add a employee"),
+            Some(OpCode::AddEmployee) => add_employee(),
             Some(OpCode::ListDepartmentEmployees) => println!("List employees in x department"),
             Some(OpCode::AllEmployees) => println!("List all employees in the company"),
             Some(OpCode::Exit) => println!("Exit"),
@@ -57,6 +58,7 @@ fn main() {
 
 
 fn display_ops() {
+    println!("-------------------------------------------------");
     println!("Welcome! What would you like to do?");
     println!("Press 1: To see a list of departments");
     println!("Press 2: To add an employee to a department");
@@ -97,6 +99,12 @@ fn add_employee() {
     println!("Example: Add John to Sales");
 
     let mut user_input = String::new();
+    let name = String::new();
+    let department = String::new();
 
     io::stdin().read_line(&mut user_input).expect("Failed to read the line.");
+
+    let new_string: Vec<_> = user_input.split_whitespace().collect();
+
+    println!("{:?}", new_string);
 }
