@@ -99,17 +99,12 @@ fn add_employee() {
     println!("Example: Add John to Sales");
 
     let mut user_input = String::new();
-    let mut name = String::new();
-    let mut department = String::new();
-
     io::stdin().read_line(&mut user_input).expect("Failed to read the line.");
-
-    let v: Vec<_> = user_input.split_whitespace().collect();
-
+    
     //Indexes that we need are v[1] and v[3] these will be signed to name and department variables
-
-    name = v[1].to_string();
-    department = v[3].to_string();
+    let v: Vec<_> = user_input.split_whitespace().collect();
+    let name = v[1]; //Employee to be added
+    let department = v[3]; //Department
 
 
     println!("Adding {} to {}", name, department);
