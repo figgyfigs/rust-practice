@@ -22,15 +22,18 @@ fn main() {
 
     //Create vector and Hashmap
     //Hashmap Key will be a String and Value will contain a Vector of employees names
-    let mut my_vec = vec!["Alan", "Jen", "Satoshi"];
+    //let mut my_vec = vec!["Alan", "Jen", "Satoshi"];
+    //let mut departments: HashMap<String, vec<String>> = HashMap::new();
     let mut departments = HashMap::new();
+
     let new_dept = String::from("Engineering");
 
-    departments.insert(&new_dept, my_vec);
 
-    for (key, value) in &departments {
-        println!("{}: {:?}", key, value);
-    }
+    // departments.insert(&new_dept, my_vec);
+
+    // for (key, value) in &departments {
+    //     println!("{}: {:?}", key, value);
+    // }
 
     loop {
         
@@ -41,7 +44,7 @@ fn main() {
         //TODO: Implement functions for each valid command
         match user_input {
             Some(OpCode::ListDepartments) => list_departments(),
-            Some(OpCode::AddEmployee) => add_employee(),
+            Some(OpCode::AddEmployee) => add_employee(&mut departments),
             Some(OpCode::ListDepartmentEmployees) => println!("List employees in x department"),
             Some(OpCode::AllEmployees) => println!("List all employees in the company"),
             Some(OpCode::Exit) => println!("Exit"),
@@ -93,7 +96,7 @@ fn list_departments() {
     println!("listing departments...");
 }
 
-fn add_employee() {
+fn add_employee(mut departments: &mut HashMap<String, Vec<String>>) -> HashMap<String, Vec<String>> {
     println!("Follow the template to add an employee to a department: ");
     println!("Add {{Name}} to {{Company Department}}");
     println!("Example: Add John to Sales");
@@ -103,9 +106,11 @@ fn add_employee() {
     
     //Indexes that we need are v[1] and v[3] these will be signed to name and department variables
     let v: Vec<_> = user_input.split_whitespace().collect();
-    let name = v[1]; //Employee to be added
-    let department = v[3]; //Department
+    let employee_name = v[1];
+    let department_name = v[3];
 
 
-    println!("Adding {} to {}", name, department);
+    println!("Adding {} to {}", employee_name, department_name);
+
+    //need to return mutable HashMap
 }
