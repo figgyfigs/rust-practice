@@ -24,9 +24,9 @@ fn main() {
     //Hashmap Key will be a String and Value will contain a Vector of employees names
     //let mut my_vec = vec!["Alan", "Jen", "Satoshi"];
     //let mut departments: HashMap<String, vec<String>> = HashMap::new();
-    let mut departments = HashMap::new();
+    let mut departments: HashMap<String, Vec<String>> = HashMap::new();
 
-    let new_dept = String::from("Engineering");
+    //let new_dept = String::from("Engineering");
 
 
     // departments.insert(&new_dept, my_vec);
@@ -96,7 +96,7 @@ fn list_departments() {
     println!("listing departments...");
 }
 
-fn add_employee(mut departments: &mut HashMap<String, Vec<String>>) -> HashMap<String, Vec<String>> {
+fn add_employee(departments: &mut HashMap<String, Vec<String>>) -> HashMap<String, Vec<String>> {
     println!("Follow the template to add an employee to a department: ");
     println!("Add {{Name}} to {{Company Department}}");
     println!("Example: Add John to Sales");
@@ -111,6 +111,8 @@ fn add_employee(mut departments: &mut HashMap<String, Vec<String>>) -> HashMap<S
 
 
     println!("Adding {} to {}", employee_name, department_name);
+
+    departments
 
     //need to return mutable HashMap
 }
