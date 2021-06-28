@@ -43,22 +43,16 @@ fn main() {
         //Matches desired command user inputted. This match will call functions
         //TODO: Implement functions for each valid command
         match user_input {
-            Some(OpCode::ListDepartments) => list_departments(),
-            Some(OpCode::AddEmployee) => add_employee(&mut departments),
-            Some(OpCode::ListDepartmentEmployees) => println!("List employees in x department"),
-            Some(OpCode::AllEmployees) => println!("List all employees in the company"),
-            Some(OpCode::Exit) => println!("Exit"),
-            Some(OpCode::InvalidOp) => println!("Invalid OpCode"),
+            OpCode::ListDepartments => list_departments(),
+            OpCode::AddEmployee => add_employee(&mut departments),
+            OpCode::ListDepartmentEmployees => println!("List employees in x department"),
+            OpCode::AllEmployees => println!("List all employees in the company"),
+            OpCode::Exit => println!("Exit"),
+            OpCode::InvalidOp => println!("Invalid OpCode"),
             None => println!("Invalid"),
         }
     }
 }
-
-    //departments.insert("Sales", my_vec);
-    //departments.insert("Sales", my_vec);
-
-    //println!("{:?}", departments);
-
 
 fn display_ops() {
     println!("-------------------------------------------------");
