@@ -43,12 +43,12 @@ fn main() {
         //Matches desired command user inputted. This match will call functions
         //TODO: Implement functions for each valid command
         match user_input {
-            OpCode::ListDepartments => list_departments(),
-            OpCode::AddEmployee => add_employee(&mut departments),
-            OpCode::ListDepartmentEmployees => println!("List employees in x department"),
-            OpCode::AllEmployees => println!("List all employees in the company"),
-            OpCode::Exit => println!("Exit"),
-            OpCode::InvalidOp => println!("Invalid OpCode"),
+            Some(OpCode::ListDepartments) => list_departments(),
+            Some(OpCode::AddEmployee) => add_employee(&mut departments),
+            Some(OpCode::ListDepartmentEmployees) => println!("List employees in x department"),
+            Some(OpCode::AllEmployees) => println!("List all employees in the company"),
+            Some(OpCode::Exit) => println!("Exit"),
+            Some(OpCode::InvalidOp) => println!("Invalid OpCode"),
             None => println!("Invalid"),
         }
     }
@@ -90,7 +90,7 @@ fn list_departments() {
     println!("listing departments...");
 }
 
-fn add_employee(departments: &mut HashMap<String, Vec<String>>) -> HashMap<String, Vec<String>> {
+fn add_employee(departments: &mut HashMap<String, Vec<String>>) {
     println!("Follow the template to add an employee to a department: ");
     println!("Add {{Name}} to {{Company Department}}");
     println!("Example: Add John to Sales");
@@ -106,7 +106,4 @@ fn add_employee(departments: &mut HashMap<String, Vec<String>>) -> HashMap<Strin
 
     println!("Adding {} to {}", employee_name, department_name);
 
-    departments
-
-    //need to return mutable HashMap
 }
