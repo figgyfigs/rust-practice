@@ -22,18 +22,19 @@ fn main() {
 
     //Create vector and Hashmap
     //Hashmap Key will be a String and Value will contain a Vector of employees names
-    //let mut my_vec = vec!["Alan", "Jen", "Satoshi"];
-    //let mut departments: HashMap<String, vec<String>> = HashMap::new();
     let mut departments: HashMap<String, Vec<String>> = HashMap::new();
 
     //let new_dept = String::from("Engineering");
+    //let mut my_vec = vec!["Alan", "Jen", "Satoshi"];
 
 
-    // departments.insert(&new_dept, my_vec);
+    //departments.insert(&new_dept, my_vec);
+    departments.insert("Engineering".to_string(), vec!["Alan".to_string(), "John".to_string()]);
 
-    // for (key, value) in &departments {
-    //     println!("{}: {:?}", key, value);
-    // }
+
+    for (key, value) in &departments {
+        println!("{}: {:?}", key, value);
+    }
 
     loop {
         
@@ -102,6 +103,11 @@ fn add_employee(departments: &mut HashMap<String, Vec<String>>) {
     let v: Vec<_> = user_input.split_whitespace().collect();
     let employee_name = v[1];
     let department_name = v[3];
+
+    match departments.is_empty() {
+        true => println!("Hashmap is empty"),
+        false => println!("HashMap is not empty"),
+    };
 
 
     println!("Adding {} to {}", employee_name, department_name);
