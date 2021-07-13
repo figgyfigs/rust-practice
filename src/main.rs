@@ -22,14 +22,14 @@ fn main() {
 
     //Create vector and Hashmap
     //Hashmap Key will be a String and Value will contain a Vector of employees names
-    let mut departments: HashMap<String, Vec<String>> = HashMap::new();
+    let mut departments: HashMap<String, Vec<&str>> = HashMap::new();
 
     //let new_dept = String::from("Engineering");
     //let mut my_vec = vec!["Alan", "Jen", "Satoshi"];
 
 
-    //departments.insert(&new_dept, my_vec);
-    departments.insert("Engineering".to_string(), vec!["Alan".to_string(), "John".to_string()]);
+    //departments.insert("Engineering".to_string(), my_vec);
+    //departments.insert("Engineering".to_string(), vec!["Alan".to_string(), "John".to_string()]);
 
 
     for (key, value) in &departments {
@@ -91,7 +91,7 @@ fn list_departments() {
     println!("listing departments...");
 }
 
-fn add_employee(departments: &mut HashMap<String, Vec<String>>) {
+fn add_employee(departments: &mut HashMap<String, Vec<&str>>) {
     println!("Follow the template to add an employee to a department: ");
     println!("Add {{Name}} to {{Company Department}}");
     println!("Example: Add John to Sales");
@@ -109,6 +109,7 @@ fn add_employee(departments: &mut HashMap<String, Vec<String>>) {
         false => println!("HashMap is not empty"),
     };
 
+    departments.insert(department_name.to_string(), vec![employee_name]);
 
     println!("Adding {} to {}", employee_name, department_name);
 
