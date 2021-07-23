@@ -117,7 +117,12 @@ fn add_employee(departments: &mut HashMap<String, Vec<String>>) {
 
 
 
+
+
+
+
 use std::collections::HashMap;
+use std::io;
 
 fn main() {
 
@@ -129,83 +134,31 @@ fn main() {
   // departments.insert(String::from("Sales"), vec![String::from("Alan"), String::from("John")]);
   // departments.insert(String::from("Sales"), vec!["Alan".to_string(), "John".to_string()]);
 
+  departments = add_employee(departments);
+
   for (key, value) in &departments {
     println!("{}: {:?}", key, value);
   }
 }
 
-fn add_employee(hashmap: HashMap<String, Vec<String>>) -> HashMap<String, Vec<String>> {
-  
+fn add_employee(mut hashmap: HashMap<String, Vec<String>>) -> HashMap<String, Vec<String>> {
+  let mut vec_to_add: Vec<String> = Vec::new();
+
+  println!("Follow the template to add an employee to a department: ");
+  println!("Add {{Name}} to {{Company Department}}");
+  println!("Example: Add John to Sales");
+
+  let mut user_input = String::new();
+  io::stdin().read_line(&mut user_input).expect("Failed to read the line.");
+
+  //Indexes that we need are v[1] and v[3] these will be signed to name and department variables
+  let v: Vec<_> = user_input.split_whitespace().collect();
+  let employee_name = v[1];
+  let department_name = v[3];
+
+  vec_to_add.push(employee_name.to_string());
+
+  hashmap.insert(department_name.to_string(), vec_to_add);
+
+  hashmap
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// fn main() {
-//     let s1 = gives_ownership();         // gives_ownership moves its return
-//                                         // value into s1
-
-//     let s2 = String::from("hello");     // s2 comes into scope
-
-//     let s3 = takes_and_gives_back(s2);  // s2 is moved into
-//                                         // takes_and_gives_back, which also
-//     println!("{}", s3);
-//                                         // moves its return value into s3
-// } // Here, s3 goes out of scope and is dropped. s2 goes out of scope but was
-//   // moved, so nothing happens. s1 goes out of scope and is dropped.
-
-// fn gives_ownership() -> String {             // gives_ownership will move its
-//                                              // return value into the function
-//                                              // that calls it
-
-//     let some_string = String::from("hello"); // some_string comes into scope
-
-//     some_string                              // some_string is returned and
-//                                              // moves out to the calling
-//                                              // function
-// }
-
-// // takes_and_gives_back will take a String and return one
-// fn takes_and_gives_back(a_string: String) -> String { // a_string comes into
-//     let x = String::from(" wooooorrrrllllddddddd");                                                  // scope
-    
-//     let new_string = a_string + &x;
-    
-//     new_string  // a_string is returned and moves out to the calling function
-// }
