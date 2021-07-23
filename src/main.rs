@@ -22,7 +22,7 @@ fn main() {
 
     //Create vector and Hashmap
     //Hashmap Key will be a String and Value will contain a Vector of employees names
-    let mut departments: HashMap<String, Vec<&str>> = HashMap::new();
+    let mut departments: HashMap<String, Vec<String>> = HashMap::new();
 
     //let new_dept = String::from("Engineering");
     //let mut my_vec = vec!["Alan", "Jen", "Satoshi"];
@@ -45,7 +45,7 @@ fn main() {
         //TODO: Implement functions for each valid command
         match user_input {
             Some(OpCode::ListDepartments) => list_departments(),
-            Some(OpCode::AddEmployee) => add_employee(&mut departments),
+            Some(OpCode::AddEmployee) => add_employee(departments),
             Some(OpCode::ListDepartmentEmployees) => println!("List employees in x department"),
             Some(OpCode::AllEmployees) => println!("List all employees in the company"),
             Some(OpCode::Exit) => println!("Exit"),
@@ -91,7 +91,9 @@ fn list_departments() {
     println!("listing departments...");
 }
 
-fn add_employee(departments: &mut HashMap<String, Vec<String>>) {
+fn add_employee(mut hashmap: HashMap<String, Vec<String>>) -> HashMap<String, Vec<String>> {
+    let mut employee_vec: Vec<String> = Vec::new();
+
     println!("Follow the template to add an employee to a department: ");
     println!("Add {{Name}} to {{Company Department}}");
     println!("Example: Add John to Sales");
@@ -104,61 +106,17 @@ fn add_employee(departments: &mut HashMap<String, Vec<String>>) {
     let employee_name = v[1];
     let department_name = v[3];
 
-    match departments.is_empty() {
+    match hashmap.is_empty() {
         true => println!("Hashmap is empty"),
         false => println!("HashMap is not empty"),
     };
 
-    departments.insert(department_name.to_owned(), vec![employee_name]);
+    employee_vec.push(employee_name.to_string());
+
+    hashmap.insert(department_name.to_string(), employee_vec);
 
     println!("Adding {} to {}", employee_name, department_name);
 
-}
+    hashmap
 
-
-
-
-
-
-
-use std::collections::HashMap;
-use std::io;
-
-fn main() {
-
-  let mut departments: HashMap<String, Vec<String>> = HashMap::new();
-  // let mut employees = vec![String::from("Alan"), String::from("John"), String::from("Eric")];
-  //let mut employees: Vec<String> = Vec::new();
-
-  //departments.insert(String::from("Sales"), employees);
-  // departments.insert(String::from("Sales"), vec![String::from("Alan"), String::from("John")]);
-  // departments.insert(String::from("Sales"), vec!["Alan".to_string(), "John".to_string()]);
-
-  departments = add_employee(departments);
-
-  for (key, value) in &departments {
-    println!("{}: {:?}", key, value);
-  }
-}
-
-fn add_employee(mut hashmap: HashMap<String, Vec<String>>) -> HashMap<String, Vec<String>> {
-  let mut vec_to_add: Vec<String> = Vec::new();
-
-  println!("Follow the template to add an employee to a department: ");
-  println!("Add {{Name}} to {{Company Department}}");
-  println!("Example: Add John to Sales");
-
-  let mut user_input = String::new();
-  io::stdin().read_line(&mut user_input).expect("Failed to read the line.");
-
-  //Indexes that we need are v[1] and v[3] these will be signed to name and department variables
-  let v: Vec<_> = user_input.split_whitespace().collect();
-  let employee_name = v[1];
-  let department_name = v[3];
-
-  vec_to_add.push(employee_name.to_string());
-
-  hashmap.insert(department_name.to_string(), vec_to_add);
-
-  hashmap
 }
