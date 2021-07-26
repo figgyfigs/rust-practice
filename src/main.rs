@@ -24,18 +24,6 @@ fn main() {
     //Hashmap Key will be a String and Value will contain a Vector of employees names
     let mut departments: HashMap<String, Vec<String>> = HashMap::new();
 
-    //let new_dept = String::from("Engineering");
-    //let mut my_vec = vec!["Alan", "Jen", "Satoshi"];
-
-
-    //departments.insert("Engineering".to_string(), my_vec);
-    //departments.insert("Engineering".to_string(), vec!["Alan".to_string(), "John".to_string()]);
-
-
-    for (key, value) in &departments {
-        println!("{}: {:?}", key, value);
-    }
-
     loop {
         
         display_ops();
@@ -45,7 +33,13 @@ fn main() {
         //TODO: Implement functions for each valid command
         match user_input {
             Some(OpCode::ListDepartments) => list_departments(),
-            Some(OpCode::AddEmployee) => add_employee(departments),
+            Some(OpCode::AddEmployee) => {
+                departments = add_employee(departments);
+
+                for (key, value) in &departments {
+                    println!("{}: {:?}", key, value);
+                }
+            },
             Some(OpCode::ListDepartmentEmployees) => println!("List employees in x department"),
             Some(OpCode::AllEmployees) => println!("List all employees in the company"),
             Some(OpCode::Exit) => println!("Exit"),
