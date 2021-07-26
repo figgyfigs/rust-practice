@@ -6,6 +6,7 @@ in a department or all people in the company by department, sorted alphabeticall
 
 use std::io;
 use std::collections::HashMap;
+use std::process;
 
 enum OpCode {
     Exit,
@@ -42,7 +43,10 @@ fn main() {
             },
             Some(OpCode::ListDepartmentEmployees) => println!("List employees in x department"),
             Some(OpCode::AllEmployees) => println!("List all employees in the company"),
-            Some(OpCode::Exit) => println!("Exit"),
+            Some(OpCode::Exit) => {
+                println!("Exiting employee system... goodbye.");
+                process::exit(1);
+            },
             Some(OpCode::InvalidOp) => println!("Invalid OpCode"),
             None => println!("Invalid"),
         }
@@ -52,11 +56,11 @@ fn main() {
 fn display_ops() {
     println!("-------------------------------------------------");
     println!("Welcome! What would you like to do?");
-    println!("Press 1: To see a list of departments");
-    println!("Press 2: To add an employee to a department");
-    println!("Press 3: To list employees in a department");
-    println!("Press 4: To list all employees in the company");
-    println!("Press 0: Exit");
+    println!("Enter 1: To see a list of departments");
+    println!("Enter 2: To add an employee to a department");
+    println!("Enter 3: To list employees in a department");
+    println!("Enter 4: To list all employees in the company");
+    println!("Enter 0: To exit");
 }
 
 fn get_opcode() -> Option<OpCode> {
