@@ -33,7 +33,7 @@ fn main() {
         //Matches desired command user inputted. This match will call functions
         //TODO: Implement functions for each valid command
         match user_input {
-            Some(OpCode::ListDepartments) => list_departments(),
+            Some(OpCode::ListDepartments) => list_departments(&departments),
             Some(OpCode::AddEmployee) => {
                 departments = add_employee(departments);
 
@@ -48,7 +48,7 @@ fn main() {
                 process::exit(1);
             },
             Some(OpCode::InvalidOp) => println!("Invalid OpCode"),
-            None => println!("Invalid"),
+            None => println!("Please enter a vaild code."),
         }
     }
 }
@@ -85,8 +85,17 @@ fn new_department() {
     
 }
 
-fn list_departments() {
+fn list_departments(hashmap: &HashMap<String, Vec<String>>) {
     println!("listing departments...");
+
+    let department_keys = hashmap.keys();
+    if department_keys.len() == 0 {
+        println!("No departments to show.")
+    } else {
+        for key in department_keys {
+            println!("{}", key)
+        }
+    }
 }
 
 fn add_employee(mut hashmap: HashMap<String, Vec<String>>) -> HashMap<String, Vec<String>> {
