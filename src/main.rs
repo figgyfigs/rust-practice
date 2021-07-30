@@ -34,6 +34,7 @@ fn main() {
         //TODO: Implement functions for each valid command
         match user_input {
             Some(OpCode::ListDepartments) => list_departments(&departments),
+
             Some(OpCode::AddEmployee) => {
                 departments = add_employee(departments);
 
@@ -41,13 +42,18 @@ fn main() {
                     println!("{}: {:?}", key, value);
                 }
             },
-            Some(OpCode::ListDepartmentEmployees) => println!("List employees in x department"),
+
+            Some(OpCode::ListDepartmentEmployees) => list_employees_in_dept(&departments),
+
             Some(OpCode::AllEmployees) => println!("List all employees in the company"),
+
             Some(OpCode::Exit) => {
                 println!("Exiting employee system... goodbye.");
                 process::exit(1);
             },
+
             Some(OpCode::InvalidOp) => println!("Invalid OpCode"),
+
             None => println!("Please enter a vaild code."),
         }
     }
@@ -63,26 +69,12 @@ fn display_ops() {
     println!("Enter 0: To exit");
 }
 
-fn get_opcode() -> Option<OpCode> {
-    let mut op_code = String::new();
-
-    io::stdin().read_line(&mut op_code).expect("Failed to read the line.");
-
-    let op_code: OpCode = match op_code.trim().parse() {
-        Ok(1) => OpCode::ListDepartments,
-        Ok(2) => OpCode::AddEmployee,
-        Ok(3) => OpCode::ListDepartmentEmployees,
-        Ok(4) => OpCode::AllEmployees,
-        Ok(0) => OpCode::Exit,
-        Ok(_) => OpCode::InvalidOp,
-        Err(_) => OpCode::InvalidOp,
-    };
-    
-    Some(op_code)
-}
-
 fn new_department() {
     
+}
+
+fn list_employees_in_dept(map: &HashMap<String, Vec<String>>) {
+    list_departments(map)
 }
 
 fn list_departments(hashmap: &HashMap<String, Vec<String>>) {
@@ -126,4 +118,22 @@ fn add_employee(mut hashmap: HashMap<String, Vec<String>>) -> HashMap<String, Ve
 
     hashmap
 
+}
+
+fn get_opcode() -> Option<OpCode> {
+    let mut op_code = String::new();
+
+    io::stdin().read_line(&mut op_code).expect("Failed to read the line.");
+
+    let op_code: OpCode = match op_code.trim().parse() {
+        Ok(1) => OpCode::ListDepartments,
+        Ok(2) => OpCode::AddEmployee,
+        Ok(3) => OpCode::ListDepartmentEmployees,
+        Ok(4) => OpCode::AllEmployees,
+        Ok(0) => OpCode::Exit,
+        Ok(_) => OpCode::InvalidOp,
+        Err(_) => OpCode::InvalidOp,
+    };
+    
+    Some(op_code)
 }
