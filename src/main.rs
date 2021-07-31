@@ -25,6 +25,10 @@ fn main() {
     //Hashmap Key will be a String and Value will contain a Vector of employees names
     let mut departments: HashMap<String, Vec<String>> = HashMap::new();
 
+    departments.insert("Sales".to_string(), vec!["John".to_string(), "Joe".to_string(), "Ana".to_string(), "Elon".to_string(), "Henry".to_string()]);
+    departments.insert("Engineering".to_string(), vec!["Luis".to_string(), "Mart".to_string(), "Will".to_string(), "Noe".to_string(), "Hert".to_string()]);
+
+
     loop {
         
         display_ops();
@@ -74,7 +78,10 @@ fn new_department() {
 }
 
 fn list_employees_in_dept(map: &HashMap<String, Vec<String>>) {
-    list_departments(map)
+    list_departments(map);
+
+    let mut selected_dept = String::new();
+    io::stdin().read_line(&mut selected_dept).expect("Failed to read the line.");
 }
 
 fn list_departments(hashmap: &HashMap<String, Vec<String>>) {
