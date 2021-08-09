@@ -88,6 +88,7 @@ fn list_departments(hashmap: &HashMap<String, Vec<String>>) {
     println!("listing departments...");
 
     let department_keys = hashmap.keys();
+    println!("{:?}", department_keys);
     if department_keys.len() == 0 {
         println!("No departments to show.")
     } else {
