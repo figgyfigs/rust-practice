@@ -4,8 +4,6 @@ employee names to a department in a company. For example, “Add Sally to Engine
 in a department or all people in the company by department, sorted alphabetically.
 */
 
-//Testing token push
-
 use std::io;
 use std::collections::HashMap;
 use std::process;
@@ -29,6 +27,8 @@ fn main() {
 
     departments.insert("Sales".to_string(), vec!["John".to_string(), "Joe".to_string(), "Ana".to_string(), "Elon".to_string(), "Henry".to_string()]);
     departments.insert("Engineering".to_string(), vec!["Luis".to_string(), "Mart".to_string(), "Will".to_string(), "Noe".to_string(), "Hert".to_string()]);
+    departments.insert("Human Resources".to_string(), vec!["Jake".to_string(), "Kirin".to_string(), "Bob".to_string(), "Noely".to_string(), "Hutson".to_string()]);
+
 
 
     loop {
@@ -89,16 +89,25 @@ fn list_employees_in_dept(map: &HashMap<String, Vec<String>>) {
 fn list_departments(hashmap: &HashMap<String, Vec<String>>) {
     println!("listing departments...");
 
+    //department_keys is a vector 
     let department_keys = hashmap.keys();
-    println!("{:?}", department_keys);
+    // println!("{:?}", department_keys);
     if department_keys.len() == 0 {
-        println!("No departments to show.")
+        println!("No departments in the company directory.")
     } else {
-        for key in department_keys {
-            println!("{}", key)
+        for (i, x) in department_keys.enumerate() {
+            println!("{}: {}", i, x);
         }
     }
 }
+
+    // if department_keys.len() == 0 {
+    //     println!("No departments to show.")
+    // } else {
+    //     for key in department_keys {
+    //         println!("{}", key)
+    //     }
+    // }
 
 fn add_employee(mut hashmap: HashMap<String, Vec<String>>) -> HashMap<String, Vec<String>> {
     let mut employee_vec: Vec<String> = Vec::new();
