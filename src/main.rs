@@ -90,8 +90,9 @@ fn list_departments(hashmap: &HashMap<String, Vec<String>>) {
     println!("listing departments...");
 
     //department_keys is a vector 
-    let department_keys = hashmap.keys();
-    // println!("{:?}", department_keys);
+    let department_keys = hashmap.keys().cloned().collect::<Vec<String>>();
+    println!("{:?}", department_keys);
+    
     if department_keys.len() == 0 {
         println!("No departments in the company directory.")
     } else {
