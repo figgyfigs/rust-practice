@@ -39,7 +39,10 @@ fn main() {
         //Matches desired command user inputted. This match will call functions
         //TODO: Implement functions for each valid command
         match user_input {
-            Some(OpCode::ListDepartments) => list_departments(&departments),
+            Some(OpCode::ListDepartments) => {
+                let x = list_departments(&departments);
+                
+            },
 
             Some(OpCode::AddEmployee) => {
                 departments = add_employee(departments);
@@ -86,29 +89,28 @@ fn list_employees_in_dept(map: &HashMap<String, Vec<String>>) {
     io::stdin().read_line(&mut selected_dept).expect("Failed to read the line.");
 }
 
-fn list_departments(hashmap: &HashMap<String, Vec<String>>) {
+fn list_departments(hashmap: &HashMap<String, Vec<String>>) -> i8 {
     println!("listing departments...");
 
     //department_keys is a vector 
+    // let department_keys = hashmap.keys();
     let department_keys = hashmap.keys().cloned().collect::<Vec<String>>();
-    println!("{:?}", department_keys);
     
-    if department_keys.len() == 0 {
+    if department_keys.is_empty(){
         println!("No departments in the company directory.")
     } else {
-        for (i, x) in department_keys.enumerate() {
-            println!("{}: {}", i, x);
+        for (i, x) in department_keys.iter().enumerate() {
+            println!("Enter {} for {}", i, x);
         }
     }
+    println!(); 
+    println!("What department would you like to show?");
+    // let user_input: i8
+    // io::stdin().read_line(&mut user_input).expect("Failed to read the line.");
+
+    2
 }
 
-    // if department_keys.len() == 0 {
-    //     println!("No departments to show.")
-    // } else {
-    //     for key in department_keys {
-    //         println!("{}", key)
-    //     }
-    // }
 
 fn add_employee(mut hashmap: HashMap<String, Vec<String>>) -> HashMap<String, Vec<String>> {
     let mut employee_vec: Vec<String> = Vec::new();
