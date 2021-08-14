@@ -29,8 +29,6 @@ fn main() {
     departments.insert("Engineering".to_string(), vec!["Luis".to_string(), "Mart".to_string(), "Will".to_string(), "Noe".to_string(), "Hert".to_string()]);
     departments.insert("Human Resources".to_string(), vec!["Jake".to_string(), "Kirin".to_string(), "Bob".to_string(), "Noely".to_string(), "Hutson".to_string()]);
 
-
-
     loop {
         
         display_ops();
@@ -40,10 +38,11 @@ fn main() {
         //TODO: Implement functions for each valid command
         match user_input {
             Some(OpCode::ListDepartments) => {
-                let x = list_departments(&departments);
-                
+                println!("I am getting here.");
+                let x: String = list_departments(&departments);
+                println!("I am also here..");
+                println!("{}", x);
             },
-
             Some(OpCode::AddEmployee) => {
                 departments = add_employee(departments);
 
@@ -51,11 +50,8 @@ fn main() {
                     println!("{}: {:?}", key, value);
                 }
             },
-
             Some(OpCode::ListDepartmentEmployees) => list_employees_in_dept(&departments),
-
             Some(OpCode::AllEmployees) => println!("List all employees in the company"),
-
             Some(OpCode::Exit) => {
                 println!("Exiting employee system... goodbye.");
                 process::exit(1);
@@ -82,33 +78,40 @@ fn new_department() {
     
 }
 
-fn list_employees_in_dept(map: &HashMap<String, Vec<String>>) {
-    list_departments(map);
+fn list_employees_in_dept() {
+    let show_department = list_departments();
 
     let mut selected_dept = String::new();
     io::stdin().read_line(&mut selected_dept).expect("Failed to read the line.");
+
+    println!(); 
+    println!("What department would you like to show?");
+    
+    let mut user_input = String::new();
+    io::stdin().read_line(&mut user_input).expect("Failed to read the line.");
+    let index: usize = user_input.trim().parse().expect("Input is not an integer");
+
+    //println!("{}",department_keys[index]);
+
+    return department_keys[index].to_string()
 }
 
-fn list_departments(hashmap: &HashMap<String, Vec<String>>) -> i8 {
+fn list_departments(hashmap: &HashMap<String, Vec<String>>) -> Vec<String> {
     println!("listing departments...");
 
     //department_keys is a vector 
     // let department_keys = hashmap.keys();
     let department_keys = hashmap.keys().cloned().collect::<Vec<String>>();
     
-    if department_keys.is_empty(){
+    if department_keys.is_empty() {
         println!("No departments in the company directory.")
     } else {
         for (i, x) in department_keys.iter().enumerate() {
             println!("Enter {} for {}", i, x);
         }
     }
-    println!(); 
-    println!("What department would you like to show?");
-    // let user_input: i8
-    // io::stdin().read_line(&mut user_input).expect("Failed to read the line.");
 
-    2
+    department_keys
 }
 
 
