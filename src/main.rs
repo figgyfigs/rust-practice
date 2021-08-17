@@ -13,7 +13,7 @@ enum OpCode {
     ListDepartments,
     AddEmployee,
     ListDepartmentEmployees,
-    AllEmployees,
+    ShowAll,
     InvalidOp,
 }
 
@@ -51,7 +51,7 @@ fn main() {
                 }
             },
             Some(OpCode::ListDepartmentEmployees) => list_employees_in_dept(&departments),
-            Some(OpCode::AllEmployees) => println!("List all employees in the company"),
+            Some(OpCode::ShowAll) => println!("List all employees in the company"),
             Some(OpCode::Exit) => {
                 println!("Exiting employee system... goodbye.");
                 process::exit(1);
@@ -78,6 +78,17 @@ fn new_department() {
     
 }
 
+
+//Show everything in the company directory. Name and department (Alphabetical order by name)
+fn show_all() {
+
+}
+
+/* 
+Shows the list of departments available.
+Promt user to choose a department they would like to show 
+Accept user input and display all employees that are assigned to that department (alphabetical order)
+*/
 fn list_employees_in_dept() {
     let show_department = list_departments();
 
@@ -96,6 +107,7 @@ fn list_employees_in_dept() {
     return department_keys[index].to_string()
 }
 
+//This will be moved inside list_employees_in_dept
 fn list_departments(hashmap: &HashMap<String, Vec<String>>) -> Vec<String> {
     println!("listing departments...");
 
