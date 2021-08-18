@@ -37,12 +37,12 @@ fn main() {
         //Matches desired command user inputted. This match will call functions
         //TODO: Implement functions for each valid command
         match user_input {
-            Some(OpCode::ListDepartments) => {
-                println!("I am getting here.");
-                let x: String = list_departments(&departments);
-                println!("I am also here..");
-                println!("{}", x);
-            },
+            // Some(OpCode::ListDepartments) => {
+            //     println!("I am getting here.");
+            //     let x: String = list_departments(&departments);
+            //     println!("I am also here..");
+            //     println!("{}", x);
+            // },
             Some(OpCode::AddEmployee) => {
                 departments = add_employee(departments);
 
@@ -50,7 +50,7 @@ fn main() {
                     println!("{}: {:?}", key, value);
                 }
             },
-            Some(OpCode::ListDepartmentEmployees) => list_employees_in_dept(&departments),
+            Some(OpCode::ListDepartmentEmployees) => display_department(&departments),
             Some(OpCode::ShowAll) => println!("List all employees in the company"),
             Some(OpCode::Exit) => {
                 println!("Exiting employee system... goodbye.");
@@ -89,9 +89,8 @@ Shows the list of departments available.
 Promt user to choose a department they would like to show 
 Accept user input and display all employees that are assigned to that department (alphabetical order)
 */
-fn list_employees_in_dept() {
-    let show_department = list_departments();
-
+fn display_department(map: &HashMap<String, Vec<String>>) {
+    
     let mut selected_dept = String::new();
     io::stdin().read_line(&mut selected_dept).expect("Failed to read the line.");
 
@@ -166,7 +165,7 @@ fn get_opcode() -> Option<OpCode> {
         Ok(1) => OpCode::ListDepartments,
         Ok(2) => OpCode::AddEmployee,
         Ok(3) => OpCode::ListDepartmentEmployees,
-        Ok(4) => OpCode::AllEmployees,
+        Ok(4) => OpCode::ShowAll,
         Ok(0) => OpCode::Exit,
         Ok(_) => OpCode::InvalidOp,
         Err(_) => OpCode::InvalidOp,
