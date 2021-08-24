@@ -10,7 +10,6 @@ use std::process;
 
 enum OpCode {
     Exit,
-    ListDepartments,
     AddEmployee,
     ListDepartmentEmployees,
     ShowAll,
@@ -37,12 +36,6 @@ fn main() {
         //Matches desired command user inputted. This match will call functions
         //TODO: Implement functions for each valid command
         match user_input {
-            // Some(OpCode::ListDepartments) => {
-            //     println!("I am getting here.");
-            //     let x: String = list_departments(&departments);
-            //     println!("I am also here..");
-            //     println!("{}", x);
-            // },
             Some(OpCode::AddEmployee) => {
                 departments = add_employee(departments);
 
@@ -67,7 +60,6 @@ fn main() {
 fn display_ops() {
     println!("-------------------------------------------------");
     println!("Welcome! What would you like to do?");
-    println!("Enter 1: To see a list of departments");
     println!("Enter 2: To add an employee to a department");
     println!("Enter 3: To list employees in a department");
     println!("Enter 4: To list all employees in the company");
@@ -90,9 +82,16 @@ Promt user to choose a department they would like to show
 Accept user input and display all employees that are assigned to that department (alphabetical order)
 */
 fn display_department(map: &HashMap<String, Vec<String>>) {
-    
-    let mut selected_dept = String::new();
-    io::stdin().read_line(&mut selected_dept).expect("Failed to read the line.");
+    println!("Loading departments...");
+
+    let department_keys = map.keys().cloned().collect::<Vec<String>>();
+    if department_keys.is_empty() {
+        println!("No departments in the company directory.");
+    } else {
+        for(i, name) in department_keys.iter().enumerate() {
+            println!("Enter {} to show the {} Department", i, name);
+        }
+    }
 
     println!(); 
     println!("What department would you like to show?");
@@ -101,29 +100,17 @@ fn display_department(map: &HashMap<String, Vec<String>>) {
     io::stdin().read_line(&mut user_input).expect("Failed to read the line.");
     let index: usize = user_input.trim().parse().expect("Input is not an integer");
 
-    //println!("{}",department_keys[index]);
+    let selected_dept = department_keys[index].to_string();
 
-    return department_keys[index].to_string()
+    println!("{:?}", map.get_key_value(&selected_dept));
+    println!("{:?}", map.get(&selected_dept));
+
 }
 
-//This will be moved inside list_employees_in_dept
-fn list_departments(hashmap: &HashMap<String, Vec<String>>) -> Vec<String> {
-    println!("listing departments...");
 
-    //department_keys is a vector 
-    // let department_keys = hashmap.keys();
-    let department_keys = hashmap.keys().cloned().collect::<Vec<String>>();
-    
-    if department_keys.is_empty() {
-        println!("No departments in the company directory.")
-    } else {
-        for (i, x) in department_keys.iter().enumerate() {
-            println!("Enter {} for {}", i, x);
-        }
-    }
 
-    department_keys
-}
+
+
 
 
 fn add_employee(mut hashmap: HashMap<String, Vec<String>>) -> HashMap<String, Vec<String>> {
@@ -162,10 +149,9 @@ fn get_opcode() -> Option<OpCode> {
     io::stdin().read_line(&mut op_code).expect("Failed to read the line.");
 
     let op_code: OpCode = match op_code.trim().parse() {
-        Ok(1) => OpCode::ListDepartments,
-        Ok(2) => OpCode::AddEmployee,
-        Ok(3) => OpCode::ListDepartmentEmployees,
-        Ok(4) => OpCode::ShowAll,
+        Ok(1) => OpCode::AddEmployee,
+        Ok(2) => OpCode::ListDepartmentEmployees,
+        Ok(3) => OpCode::ShowAll,
         Ok(0) => OpCode::Exit,
         Ok(_) => OpCode::InvalidOp,
         Err(_) => OpCode::InvalidOp,
