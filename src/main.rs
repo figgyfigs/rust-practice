@@ -60,9 +60,9 @@ fn main() {
 fn display_ops() {
     println!("-------------------------------------------------");
     println!("Welcome! What would you like to do?");
-    println!("Enter 2: To add an employee to a department");
-    println!("Enter 3: To list employees in a department");
-    println!("Enter 4: To list all employees in the company");
+    println!("Enter 1: To add an employee to a department");
+    println!("Enter 2: To list employees in a department");
+    println!("Enter 3: To list all employees in the company");
     println!("Enter 0: To exit");
 }
 
@@ -84,7 +84,12 @@ Accept user input and display all employees that are assigned to that department
 fn display_department(map: &HashMap<String, Vec<String>>) {
     println!("Loading departments...");
 
-    let department_keys = map.keys().cloned().collect::<Vec<String>>();
+    let department_keys = map.keys().cloned()
+        .collect::<Vec<String>>().sort_by(|a, b| a.to_lowercase().cmp(&b.to_lowercase()));
+
+    // let new_vec = department_keys.sort();
+    // println!("Modified vec is {:?}", new_vec);
+
     if department_keys.is_empty() {
         println!("No departments in the company directory.");
     } else {
@@ -102,8 +107,13 @@ fn display_department(map: &HashMap<String, Vec<String>>) {
 
     let selected_dept = department_keys[index].to_string();
 
-    println!("{:?}", map.get_key_value(&selected_dept));
-    println!("{:?}", map.get(&selected_dept));
+    match map.get(&selected_dept) {
+        Some(name) => println!("{}: {:?}", selected_dept, name),
+        None => println!("Department is empty")
+    }
+
+    //println!("{:?}", map.get_key_value(&selected_dept));
+    //println!("{:?}", map.get(&selected_dept));
 
 }
 
