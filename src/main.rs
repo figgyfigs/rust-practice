@@ -84,9 +84,10 @@ Accept user input and display all employees that are assigned to that department
 fn display_department(map: &HashMap<String, Vec<String>>) {
     println!("Loading departments...");
 
-    let department_keys = map.keys().cloned()
-        .collect::<Vec<String>>().sort_by(|a, b| a.to_lowercase().cmp(&b.to_lowercase()));
+    let department_keys = map.keys().cloned().collect::<Vec<String>>();
 
+    // department_keys.sort_by(|a, b| a.to_lowercase().cmp(&b.to_lowercase()));
+    // println!("{:?}", department_keys);
     // let new_vec = department_keys.sort();
     // println!("Modified vec is {:?}", new_vec);
 
@@ -111,17 +112,7 @@ fn display_department(map: &HashMap<String, Vec<String>>) {
         Some(name) => println!("{}: {:?}", selected_dept, name),
         None => println!("Department is empty")
     }
-
-    //println!("{:?}", map.get_key_value(&selected_dept));
-    //println!("{:?}", map.get(&selected_dept));
-
 }
-
-
-
-
-
-
 
 fn add_employee(mut hashmap: HashMap<String, Vec<String>>) -> HashMap<String, Vec<String>> {
     let mut employee_vec: Vec<String> = Vec::new();
