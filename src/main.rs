@@ -130,9 +130,9 @@ fn add_employee(mut map: HashMap<String, Vec<String>>) -> HashMap<String, Vec<St
     let department_name = v[3];
 
     match map.contains_key(department_name) {
-        //If true, the department exist so we must insert the employee into the Vec.
+        //If true, the department exist so we must insert the employee into the appropiate vector. This wont delete the department that exist already.
         true => {
-
+            map.entry(department_name.to_string()).or_insert_with(Vec::new).push(employee_name.to_string());
         },
         //If false, the department doesn't exist. We insert the department name and vec including the employee
         false => {
