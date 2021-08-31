@@ -25,8 +25,8 @@ fn main() {
     let mut departments: HashMap<String, Vec<String>> = HashMap::new();
 
     departments.insert("Sales".to_string(), vec!["John".to_string(), "Joe".to_string(), "Ana".to_string(), "Elon".to_string(), "Henry".to_string()]);
-    departments.insert("Engineering".to_string(), vec!["Luis".to_string(), "Mart".to_string(), "Will".to_string(), "Noe".to_string(), "Hert".to_string()]);
-    departments.insert("Human Resources".to_string(), vec!["Jake".to_string(), "Kirin".to_string(), "Bob".to_string(), "Noely".to_string(), "Hutson".to_string()]);
+    // departments.insert("Engineering".to_string(), vec!["Luis".to_string(), "Mart".to_string(), "Will".to_string(), "Noe".to_string(), "Hert".to_string()]);
+    // departments.insert("Human Resources".to_string(), vec!["Jake".to_string(), "Kirin".to_string(), "Bob".to_string(), "Noely".to_string(), "Hutson".to_string()]);
 
     loop {
         
@@ -108,13 +108,13 @@ fn display_department(map: &HashMap<String, Vec<String>>) {
 
     let selected_dept = department_keys[index].to_string();
 
-    match map.get(&selected_dept) {
-        Some(name) => println!("{}: {:?}", selected_dept, name),
+    match map.get_key_value(&selected_dept) {
+        Some(name) => println!("{}: {:?}", name.0, name.1),
         None => println!("Department is empty")
     }
 }
 
-fn add_employee(mut hashmap: HashMap<String, Vec<String>>) -> HashMap<String, Vec<String>> {
+fn add_employee(mut map: HashMap<String, Vec<String>>) -> HashMap<String, Vec<String>> {
     let mut employee_vec: Vec<String> = Vec::new();
 
     println!("Follow the template to add an employee to a department: ");
@@ -129,19 +129,23 @@ fn add_employee(mut hashmap: HashMap<String, Vec<String>>) -> HashMap<String, Ve
     let employee_name = v[1];
     let department_name = v[3];
 
-    match hashmap.is_empty() {
-        true => println!("Hashmap is empty"),
-        false => println!("HashMap is not empty"),
-    };
+    match map.contains_key(department_name) {
+        //If true, the department exist so we must insert the employee into the Vec.
+        true => {
 
-    employee_vec.push(employee_name.to_string());
+        },
+        //If false, the department doesn't exist. We insert the department name and vec including the employee
+        false => {
+            employee_vec.push(employee_name.to_string());
+            map.insert(department_name.to_string(), employee_vec);
+        },
+    }
 
-    hashmap.insert(department_name.to_string(), employee_vec);
-
-    println!("Adding {} to {}", employee_name, department_name);
-
-    hashmap
-
+    // match map.is_empty() {
+    //     true => println!("Hashmap is empty"),
+    //     false => println!("HashMap is not empty"),
+    // };
+    map
 }
 
 fn get_opcode() -> Option<OpCode> {
